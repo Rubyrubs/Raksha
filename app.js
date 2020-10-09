@@ -1,25 +1,48 @@
 
 (function(){
-      let inputItem= document.querySelector('#input');
-       inputItem.onkeyup= function(e) {
-        if (e.keyCode===13){
-            if(inputItem.value){
-                addItem(inputItem);
+let  selectedcolor= "#fff";
+init();
+makecolorpalette();
 
-            }
-        }
-    };
-            
-    function addItem(Item){
-        let ul= document.querySelector('#list');
-        let li= document.createElement('li');
-        let textNode= document.createTextNode(inputItem.value);
-        li.appendChild(textNode);
-        ul.appendChild(li);
-        inputItem.value='';
-        li.onclick= function(e){
-            e.target.remove();
-        };
-    
+
+
+function init(){
+    let dots=document.querySelector('#dots');
+    for (let i = 0; i < dots.children.length; i++) {
+        const dot = dots.children[i];
+        dot.addEventListener('click',changecolor);
+        
     }
+}
+
+ function changecolor(e){
+     if (e.target.style.backgroundColor= selectedcolor) {
+                    
+      e.target.style.backgroundColor= "none";
+      
+      } else {
+        
+        e.target.style.backgroundColor= selectedcolor;
+      } 
+     
+   }
+
+
+
+
+function makecolorpalette(){
+      let palette=document.querySelector('#palette');
+      let colors=['red','orange','gold','limegreen','blue'];
+    for (let i = 0; i< palette.children.length; i++) {
+      const colorbox = palette.children[i];
+      colorbox.style.backgroundColor= colors[i% colors.length];
+      colorbox.addEventListener('click',function(e){
+          selectedcolor=e.target.style.backgroundColor;
+      });
+
+       
+    }
+}
+
 })();
+
